@@ -1,0 +1,18 @@
+[package]
+name = "one_err"
+version = "0.0.1"
+edition = "2018"
+
+[dependencies]
+indexmap = { version = "1.5", optional = true }
+serde = { version = "1", default-features = false }
+serde_json = { version = "1", default-features = false }
+
+[dev-dependencies]
+
+[features]
+default = ["alloc"]
+
+std = ["serde/std", "serde_json/std"]
+alloc = ["serde/alloc", "serde_json/alloc"]
+preserve_order = ["indexmap", "serde_json/preserve_order"]
