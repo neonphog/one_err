@@ -33,9 +33,9 @@ impl<'ltr, 'ltf> std::io::Write for IoToFmt<'ltr, 'ltf> {
     }
 }
 
-pub(crate) fn fmt_display<'a, 'b, 'c, T: ?Sized + serde::Serialize>(
-    f: &'a mut std::fmt::Formatter<'b>,
-    t: &'c T,
+pub(crate) fn fmt_display<'a, T: ?Sized + serde::Serialize>(
+    f: &mut std::fmt::Formatter<'a>,
+    t: &T,
 ) -> std::fmt::Result {
     #[cfg(feature = "std")]
     {
@@ -48,9 +48,9 @@ pub(crate) fn fmt_display<'a, 'b, 'c, T: ?Sized + serde::Serialize>(
     }
 }
 
-pub(crate) fn fmt_debug_alt<'a, 'b, 'c, T: ?Sized + serde::Serialize>(
-    f: &'a mut std::fmt::Formatter<'b>,
-    t: &'c T,
+pub(crate) fn fmt_debug_alt<'a, T: ?Sized + serde::Serialize>(
+    f: &mut std::fmt::Formatter<'a>,
+    t: &T,
 ) -> std::fmt::Result {
     #[cfg(feature = "std")]
     {
@@ -63,6 +63,7 @@ pub(crate) fn fmt_debug_alt<'a, 'b, 'c, T: ?Sized + serde::Serialize>(
     }
 }
 
+/*
 const NOT_FOUND: &str = "NotFound";
 const PERMISSION_DENIED: &str = "PermissionDenied";
 const CONNECTION_REFUSED: &str = "ConnectionRefused";
@@ -106,7 +107,7 @@ pub(crate) fn err_kind_to_str(kind: std::io::ErrorKind) -> &'static str {
         UnexpectedEof => UNEXPECTED_EOF,
         Unsupported => UNSUPPORTED,
         OutOfMemory => OUT_OF_MEMORY,
-        Other | _ => OTHER,
+        _ => OTHER,
     }
 }
 
@@ -132,6 +133,7 @@ pub(crate) fn str_kind_to_err(kind: &str) -> std::io::ErrorKind {
         UNEXPECTED_EOF => UnexpectedEof,
         UNSUPPORTED => Unsupported,
         OUT_OF_MEMORY => OutOfMemory,
-        OTHER | _ => Other,
+        _ => Other,
     }
 }
+*/

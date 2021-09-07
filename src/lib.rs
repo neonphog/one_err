@@ -9,24 +9,29 @@ const SOURCE: &str = "source";
 const BACKTRACE: &str = "backtrace";
 const MESSAGE: &str = "message";
 
-mod util;
-use util::*;
+pub mod errno;
+pub use errno::ErrNo;
 
 mod inner;
 use inner::*;
+
+mod util;
+use util::*;
 
 /// OneErr to rule them all
 pub struct OneErr(std::io::Error);
 
 impl std::fmt::Display for OneErr {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        self.priv_as_inner().fmt(f)
+    fn fmt(&self, _f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        //self.priv_as_inner().fmt(f)
+        unimplemented!()
     }
 }
 
 impl std::fmt::Debug for OneErr {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        self.priv_as_inner().fmt(f)
+    fn fmt(&self, _f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        //self.priv_as_inner().fmt(f)
+        unimplemented!()
     }
 }
 
@@ -34,13 +39,15 @@ impl std::error::Error for OneErr {}
 
 impl Clone for OneErr {
     fn clone(&self) -> Self {
-        self.priv_as_inner().clone().into()
+        //self.priv_as_inner().clone().into()
+        unimplemented!()
     }
 }
 
 impl PartialEq for OneErr {
-    fn eq(&self, oth: &Self) -> bool {
-        self.priv_as_inner() == oth.priv_as_inner()
+    fn eq(&self, _oth: &Self) -> bool {
+        //self.priv_as_inner() == oth.priv_as_inner()
+        unimplemented!()
     }
 }
 
@@ -50,8 +57,27 @@ impl From<std::io::ErrorKind> for OneErr {
     fn from(k: std::io::ErrorKind) -> Self {
         Self(std::io::Error::new(
             k,
-            OneErrInner::new(err_kind_to_str(k).into()),
+            OneErrInner::new(),
         ))
+    }
+}
+
+impl From<i32> for OneErr {
+    fn from(e: i32) -> Self {
+        ErrNo::from(e).into()
+    }
+}
+
+impl From<ErrNo> for OneErr {
+    fn from(e: ErrNo) -> Self {
+        let k: std::io::ErrorKind = (&e).into();
+
+        let mut inner = OneErrInner::new();
+        if let std::io::ErrorKind::Other = &k {
+            inner.set_field(OS.into(), i32::from(&e));
+        }
+
+        Self(std::io::Error::new(k, inner))
     }
 }
 
@@ -60,27 +86,24 @@ impl From<std::io::Error> for OneErr {
         // we have to be careful about this one...
         // we need the inner to be a OneErrInner.
 
-        // first, capture some things just in case
-        let kind = e.kind();
-        let os = e.raw_os_error();
-
-        // see if the inner type is already a OneErrInner
-        let message = if e.get_ref().is_some() {
-            match e.into_inner().unwrap().downcast::<OneErrInner>() {
-                Ok(r) => return (*r).into(),
-                Err(r) => format!("{}", r),
+        // if our inner data is already a OneErrorInner,
+        // we can just wrap it up, call it good.
+        if let Some(r) = e.get_ref() {
+            if let Some(_) = r.downcast_ref::<OneErrInner>() {
+                return Self(e);
             }
-        } else {
-            format!("{}", e)
-        };
-
-        // otherwise, build one
-        let mut inner = OneErrInner::new(err_kind_to_str(kind).into());
-        if let Some(os) = os {
-            inner.set_field(OS.into(), os);
         }
+
+        // if there is an os errno, use that
+        if let Some(e) = e.raw_os_error() {
+            return e.into();
+        }
+
+        // otherwise, just go off the io::ErrorKind
+        let message = format!("{}", e);
+        let mut inner = OneErrInner::new();
         inner.set_field(MESSAGE.into(), message);
-        Self(std::io::Error::new(kind, inner))
+        Self(std::io::Error::new(e.kind(), inner))
     }
 }
 
@@ -104,44 +127,35 @@ impl std::ops::Deref for OneErr {
     }
 }
 
-impl std::ops::DerefMut for OneErr {
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        &mut self.0
-    }
-}
-
 impl AsRef<std::io::Error> for OneErr {
     fn as_ref(&self) -> &std::io::Error {
         &self.0
     }
 }
 
-impl AsMut<std::io::Error> for OneErr {
-    fn as_mut(&mut self) -> &mut std::io::Error {
-        &mut self.0
-    }
-}
-
 impl serde::Serialize for OneErr {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    fn serialize<S>(&self, _serializer: S) -> Result<S::Ok, S::Error>
     where
         S: serde::Serializer,
     {
-        self.priv_as_inner().serialize(serializer)
+        //self.priv_as_inner().serialize(serializer)
+        unimplemented!()
     }
 }
 
 impl<'de> serde::Deserialize<'de> for OneErr {
-    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    fn deserialize<D>(_deserializer: D) -> Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
-        let inner: OneErrInner = serde::Deserialize::deserialize(deserializer)?;
-        Ok(inner.into())
+        //let inner: OneErrInner = serde::Deserialize::deserialize(deserializer)?;
+        //Ok(inner.into())
+        unimplemented!()
     }
 }
 
 impl OneErr {
+    /*
     /// Create a new OneErr error instance.
     pub fn new<K, M>(kind: &K, message: &M) -> Self
     where
@@ -154,17 +168,20 @@ impl OneErr {
         inner.set_field(MESSAGE.into(), message.to_string());
         Self(std::io::Error::new(io_kind, inner))
     }
+    */
 
     /// Get the std::io::ErrorKind associated with this instance.
     pub fn kind(&self) -> std::io::ErrorKind {
         self.0.kind()
     }
 
+    /*
     /// Get the &str kind associated with this instance.
     /// This can be more descriptive where `kind()` might return 'Other'.
     pub fn str_kind(&self) -> &str {
         &self.priv_as_inner().kind
     }
+    */
 
     /// Get a reference to the inner std::io::Error of this instance.
     pub fn as_io(&self) -> &std::io::Error {
@@ -202,12 +219,6 @@ impl OneErr {
 
 // -- private -- //
 
-impl From<OneErrInner> for OneErr {
-    fn from(e: OneErrInner) -> Self {
-        Self(e.into())
-    }
-}
-
 impl OneErr {
     fn priv_as_inner(&self) -> &OneErrInner {
         // we can do all these unwraps because we control
@@ -232,17 +243,20 @@ impl OneErr {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    //use super::*;
 
     #[test]
     fn assert_bounds() {
+        /*
         fn assert_bounds<T: 'static + Send + Sync + Unpin>(_t: T) {}
         let one_err: OneErr = std::io::ErrorKind::Other.into();
         assert_bounds(one_err);
+        */
     }
 
     #[test]
     fn display() {
+        /*
         let e: OneErr = std::io::ErrorKind::NotFound.into();
         println!("{}", e);
 
@@ -264,5 +278,6 @@ mod tests {
         println!("GOT ENCODED: {}", enc);
         let dec: OneErr = serde_json::from_str(&enc).unwrap();
         println!("GOT DECODED: {}", dec);
+        */
     }
 }

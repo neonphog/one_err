@@ -5,6 +5,7 @@ edition = "2018"
 
 [dependencies]
 indexmap = { version = "1.5", optional = true }
+libc = "0.2.101"
 serde = { version = "1", default-features = false }
 serde_json = { version = "1", default-features = false }
 

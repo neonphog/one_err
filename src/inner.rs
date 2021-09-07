@@ -1,28 +1,25 @@
 use crate::*;
 
 #[derive(Clone, PartialEq, Eq)]
-pub(crate) struct OneErrInner {
-    pub(crate) kind: Box<str>,
-    pub(crate) fields: Option<TopMap>,
-}
+pub(crate) struct OneErrInner(Box<Option<TopMap>>);
 
 impl OneErrInner {
-    pub fn new(kind: Box<str>) -> Self {
-        Self { kind, fields: None }
+    pub fn new() -> Self {
+        Self(Box::new(None))
     }
 
     pub fn set_field<T>(&mut self, name: Box<str>, t: T)
     where
         T: Into<serde_json::Value>,
     {
-        if self.fields.is_none() {
-            self.fields = Some(TopMap::new());
+        if self.0.is_none() {
+            self.0 = Box::new(Some(TopMap::new()));
         }
-        self.fields.as_mut().unwrap().insert(name, t.into());
+        self.0.as_mut().as_mut().unwrap().insert(name, t.into());
     }
 
     pub fn get_field(&self, name: &str) -> Option<&serde_json::Value> {
-        if let Some(f) = &self.fields {
+        if let Some(f) = &*self.0 {
             return f.get(name);
         }
         None
@@ -47,12 +44,25 @@ impl std::fmt::Debug for OneErrInner {
 
 impl std::error::Error for OneErrInner {}
 
-impl From<OneErrInner> for std::io::Error {
-    fn from(e: OneErrInner) -> Self {
-        Self::new(str_kind_to_err(&e.kind), e)
+impl serde::Serialize for OneErrInner {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeMap;
+        if let Some(f) = &*self.0 {
+            let mut map = serializer.serialize_map(Some(f.len()))?;
+            for (n, v) in f.iter() {
+                map.serialize_entry(n, v)?;
+            }
+            map.end()
+        } else {
+            serializer.serialize_map(Some(0))?.end()
+        }
     }
 }
 
+/*
 impl serde::Serialize for OneErrInner {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
@@ -137,3 +147,4 @@ impl<'de> serde::Deserialize<'de> for OneErrInner {
         deserializer.deserialize_map(V)
     }
 }
+*/
