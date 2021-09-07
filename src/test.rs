@@ -75,13 +75,13 @@ fn disp_ser_deser() {
     e.set_field("test", "test");
     test("Other", "EOTHER", "Other", e);
 
-    let mut e = OneErr::from(ErrNo::L3Hlt);
+    let mut e = OneErr::from(ErrNo::Fault);
     e.set_field("test", "test");
-    test("Other", "EL3HLT", "EL3HLT", e);
+    test("Other", "EFAULT", "EFAULT", e);
 
-    let mut e = OneErr::from(std::io::Error::from_raw_os_error(libc::EL3HLT));
+    let mut e = OneErr::from(std::io::Error::from_raw_os_error(libc::EFAULT));
     e.set_field("test", "test");
-    test("Other", "EL3HLT", "EL3HLT", e);
+    test("Other", "EFAULT", "EFAULT", e);
 
     let mut e = OneErr::from(ErrNo::Other);
     e.set_field("test", "test");
@@ -90,8 +90,8 @@ fn disp_ser_deser() {
     let e = OneErr::new("ConnectionReset", "my msg");
     test("ConnectionReset", "ECONNRESET", "ConnectionReset", e);
 
-    let e = OneErr::new("EL3HLT", "my msg");
-    test("Other", "EL3HLT", "EL3HLT", e);
+    let e = OneErr::new("EFAULT", "my msg");
+    test("Other", "EFAULT", "EFAULT", e);
 
     let e = OneErr::new("CustomMsg", "my msg");
     test("Other", "EOTHER", "CustomMsg", e);

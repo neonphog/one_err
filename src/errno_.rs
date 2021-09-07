@@ -141,51 +141,50 @@ pub enum ErrNo {
     /// Identifier removed
     IdRm = libc::EIDRM,
 
-    /// Channel number out of range
-    ChRng = libc::ECHRNG,
+    // /// Channel number out of range
+    // ChRng = libc::ECHRNG,
 
-    /// Level 2 not synchronized
-    L2NSync = libc::EL2NSYNC,
+    // /// Level 2 not synchronized
+    // L2NSync = libc::EL2NSYNC,
 
-    /// Level 3 halted
-    L3Hlt = libc::EL3HLT,
+    // /// Level 3 halted
+    // L3Hlt = libc::EL3HLT,
 
-    /// Level 3 reset
-    L3Rst = libc::EL3RST,
+    // /// Level 3 reset
+    // L3Rst = libc::EL3RST,
 
-    /// Link number out of range
-    LNRng = libc::ELNRNG,
+    // /// Link number out of range
+    // LNRng = libc::ELNRNG,
 
-    /// Protocol driver not attached
-    Unatch = libc::EUNATCH,
+    // /// Protocol driver not attached
+    // Unatch = libc::EUNATCH,
 
-    /// No CSI structure available
-    NoCSI = libc::ENOCSI,
+    // /// No CSI structure available
+    // NoCSI = libc::ENOCSI,
 
-    /// Level 2 halted
-    L2Hlt = libc::EL2HLT,
+    // /// Level 2 halted
+    // L2Hlt = libc::EL2HLT,
 
-    /// Invalid exchange
-    BadE = libc::EBADE,
+    // /// Invalid exchange
+    // BadE = libc::EBADE,
 
-    /// Invalid request descriptor
-    BadR = libc::EBADR,
+    // /// Invalid request descriptor
+    // BadR = libc::EBADR,
 
-    /// Exchange full
-    XFull = libc::EXFULL,
+    // /// Exchange full
+    // XFull = libc::EXFULL,
 
-    /// No anode
-    NoAno = libc::ENOANO,
+    // /// No anode
+    // NoAno = libc::ENOANO,
 
-    /// Invalid request code
-    BadRqC = libc::EBADRQC,
+    // /// Invalid request code
+    // BadRqC = libc::EBADRQC,
 
-    /// Invalid slot
-    BadSlt = libc::EBADSLT,
+    // /// Invalid slot
+    // BadSlt = libc::EBADSLT,
 
-    /// Bad font file format
-    BFont = libc::EBFONT,
-
+    // /// Bad font file format
+    // BFont = libc::EBFONT,
     /// Device not a stream
     NoStr = libc::ENOSTR,
 
@@ -198,75 +197,70 @@ pub enum ErrNo {
     /// Out of streams resources
     NoSR = libc::ENOSR,
 
-    /// Machine is not on the network
-    NoNet = libc::ENONET,
+    // /// Machine is not on the network
+    // NoNet = libc::ENONET,
 
-    /// Package not installed
-    NoPkg = libc::ENOPKG,
-
+    // /// Package not installed
+    // NoPkg = libc::ENOPKG,
     /// Object is remote
     Remote = libc::EREMOTE,
 
     /// Link has been severed
     NoLink = libc::ENOLINK,
 
-    /// Advertise error
-    Adv = libc::EADV,
+    // /// Advertise error
+    // Adv = libc::EADV,
 
-    /// Srmount error
-    SrMnt = libc::ESRMNT,
+    // /// Srmount error
+    // SrMnt = libc::ESRMNT,
 
-    /// Communication error on send
-    Comm = libc::ECOMM,
-
+    // /// Communication error on send
+    // Comm = libc::ECOMM,
     /// Protocol error
     Proto = libc::EPROTO,
 
     /// Multihop attempted
     MultiHop = libc::EMULTIHOP,
 
-    /// RFS specific error
-    DotDot = libc::EDOTDOT,
-
+    // /// RFS specific error
+    // DotDot = libc::EDOTDOT,
     /// Not a data message
     BadMsg = libc::EBADMSG,
 
     /// Value too large for defined data type
     Overflow = libc::EOVERFLOW,
 
-    /// Name not unique on network
-    NotUniq = libc::ENOTUNIQ,
+    // /// Name not unique on network
+    // NotUniq = libc::ENOTUNIQ,
 
-    /// File descriptor in bad state
-    BadFD = libc::EBADFD,
+    // /// File descriptor in bad state
+    // BadFD = libc::EBADFD,
 
-    /// Remote address changed
-    RemChg = libc::EREMCHG,
+    // /// Remote address changed
+    // RemChg = libc::EREMCHG,
 
-    /// Can not access a needed shared library
-    LibAcc = libc::ELIBACC,
+    // /// Can not access a needed shared library
+    // LibAcc = libc::ELIBACC,
 
-    /// Accessing a corrupted shared library
-    LibBad = libc::ELIBBAD,
+    // /// Accessing a corrupted shared library
+    // LibBad = libc::ELIBBAD,
 
-    /// .lib section in a.out corrupted
-    LibScn = libc::ELIBSCN,
+    // /// .lib section in a.out corrupted
+    // LibScn = libc::ELIBSCN,
 
-    /// Attempting to link in too many shared libraries
-    LibMax = libc::ELIBMAX,
+    // /// Attempting to link in too many shared libraries
+    // LibMax = libc::ELIBMAX,
 
-    /// Cannot exec a shared library directly
-    LibExec = libc::ELIBEXEC,
-
+    // /// Cannot exec a shared library directly
+    // LibExec = libc::ELIBEXEC,
     /// Illegal byte sequence
     IlSeq = libc::EILSEQ,
 
-    /// Interrupted system call should be restarted
-    Restart = libc::ERESTART,
+    // /// Interrupted system call should be restarted
+    // Restart = libc::ERESTART,
 
-    /// Streams pipe error
-    StrPipe = libc::ESTRPIPE,
-
+    // /// Streams pipe error
+    // StrPipe = libc::ESTRPIPE,
     /// Too many users
     Users = libc::EUSERS,
 
@@ -357,21 +351,20 @@ pub enum ErrNo {
     /// Stale NFS file handle
     Stale = libc::ESTALE,
 
-    /// Structure needs cleaning
-    UClean = libc::EUCLEAN,
+    // /// Structure needs cleaning
+    // UClean = libc::EUCLEAN,
 
-    /// Not a Xlibc::ENIX named type file
-    NotNam = libc::ENOTNAM,
+    // /// Not a Xlibc::ENIX named type file
+    // NotNam = libc::ENOTNAM,
 
-    /// No Xlibc::ENIX semaphores available
-    NAvail = libc::ENAVAIL,
+    // /// No Xlibc::ENIX semaphores available
+    // NAvail = libc::ENAVAIL,
 
-    /// Is a named type file
-    IsNam = libc::EISNAM,
+    // /// Is a named type file
+    // IsNam = libc::EISNAM,
 
-    /// Remote I/O error
-    RemoteIO = libc::EREMOTEIO,
-
+    // /// Remote I/O error
+    // RemoteIO = libc::EREMOTEIO,
     /// Other / Unrecognized Error
     Other = EOTHER,
 }
@@ -435,47 +428,48 @@ impl From<i32> for ErrNo {
             libc::ELOOP => Self::Loop,
             libc::ENOMSG => Self::NoMsg,
             libc::EIDRM => Self::IdRm,
-            libc::ECHRNG => Self::ChRng,
-            libc::EL2NSYNC => Self::L2NSync,
-            libc::EL3HLT => Self::L3Hlt,
-            libc::EL3RST => Self::L3Rst,
-            libc::ELNRNG => Self::LNRng,
-            libc::EUNATCH => Self::Unatch,
-            libc::ENOCSI => Self::NoCSI,
-            libc::EL2HLT => Self::L2Hlt,
-            libc::EBADE => Self::BadE,
-            libc::EBADR => Self::BadR,
-            libc::EXFULL => Self::XFull,
-            libc::ENOANO => Self::NoAno,
-            libc::EBADRQC => Self::BadRqC,
-            libc::EBADSLT => Self::BadSlt,
-            libc::EBFONT => Self::BFont,
+            //libc::ECHRNG => Self::ChRng,
+            //libc::EL2NSYNC => Self::L2NSync,
+            //libc::EL3HLT => Self::L3Hlt,
+            //libc::EL3RST => Self::L3Rst,
+            //libc::ELNRNG => Self::LNRng,
+            //libc::EUNATCH => Self::Unatch,
+            //libc::ENOCSI => Self::NoCSI,
+            //libc::EL2HLT => Self::L2Hlt,
+            //libc::EBADE => Self::BadE,
+            //libc::EBADR => Self::BadR,
+            //libc::EXFULL => Self::XFull,
+            //libc::ENOANO => Self::NoAno,
+            //libc::EBADRQC => Self::BadRqC,
+            //libc::EBADSLT => Self::BadSlt,
+            //libc::EBFONT => Self::BFont,
             libc::ENOSTR => Self::NoStr,
             libc::ENODATA => Self::NoData,
             libc::ETIME => Self::Time,
             libc::ENOSR => Self::NoSR,
-            libc::ENONET => Self::NoNet,
-            libc::ENOPKG => Self::NoPkg,
+            //libc::ENONET => Self::NoNet,
+            //libc::ENOPKG => Self::NoPkg,
+            libc::EREMOTE => Self::Remote,
             libc::ENOLINK => Self::NoLink,
-            libc::EADV => Self::Adv,
-            libc::ESRMNT => Self::SrMnt,
-            libc::ECOMM => Self::Comm,
+            //libc::EADV => Self::Adv,
+            //libc::ESRMNT => Self::SrMnt,
+            //libc::ECOMM => Self::Comm,
             libc::EPROTO => Self::Proto,
             libc::EMULTIHOP => Self::MultiHop,
-            libc::EDOTDOT => Self::DotDot,
+            //libc::EDOTDOT => Self::DotDot,
             libc::EBADMSG => Self::BadMsg,
             libc::EOVERFLOW => Self::Overflow,
-            libc::ENOTUNIQ => Self::NotUniq,
-            libc::EBADFD => Self::BadFD,
-            libc::EREMCHG => Self::RemChg,
-            libc::ELIBACC => Self::LibAcc,
-            libc::ELIBBAD => Self::LibBad,
-            libc::ELIBSCN => Self::LibScn,
-            libc::ELIBMAX => Self::LibMax,
-            libc::ELIBEXEC => Self::LibExec,
+            //libc::ENOTUNIQ => Self::NotUniq,
+            //libc::EBADFD => Self::BadFD,
+            //libc::EREMCHG => Self::RemChg,
+            //libc::ELIBACC => Self::LibAcc,
+            //libc::ELIBBAD => Self::LibBad,
+            //libc::ELIBSCN => Self::LibScn,
+            //libc::ELIBMAX => Self::LibMax,
+            //libc::ELIBEXEC => Self::LibExec,
             libc::EILSEQ => Self::IlSeq,
-            libc::ERESTART => Self::Restart,
-            libc::ESTRPIPE => Self::StrPipe,
+            //libc::ERESTART => Self::Restart,
+            //libc::ESTRPIPE => Self::StrPipe,
             libc::EUSERS => Self::Users,
             libc::ENOTSOCK => Self::NotSock,
             libc::EDESTADDRREQ => Self::DestAddrReq,
@@ -506,11 +500,11 @@ impl From<i32> for ErrNo {
             libc::EALREADY => Self::Already,
             libc::EINPROGRESS => Self::InProgress,
             libc::ESTALE => Self::Stale,
-            libc::EUCLEAN => Self::UClean,
-            libc::ENOTNAM => Self::NotNam,
-            libc::ENAVAIL => Self::NAvail,
-            libc::EISNAM => Self::IsNam,
-            libc::EREMOTEIO => Self::RemoteIO,
+            //libc::EUCLEAN => Self::UClean,
+            //libc::ENOTNAM => Self::NotNam,
+            //libc::ENAVAIL => Self::NAvail,
+            //libc::EISNAM => Self::IsNam,
+            //libc::EREMOTEIO => Self::RemoteIO,
             x if x == EPERM_1 || x == EPERM_2 => Self::Perm,
             x if x == EDEADLOCK_1 || x == EDEADLOCK_2 => Self::DeadLk,
             x if x == EWOULDBLOCK_1 || x == EWOULDBLOCK_2 => Self::WouldBlock,
@@ -706,50 +700,50 @@ pub mod errno {
     /// The const str 'EIDRM'.
     pub const EIDRM_STR: &str = "EIDRM";
 
-    /// The const str 'ECHRNG'.
-    pub const ECHRNG_STR: &str = "ECHRNG";
+    // /// The const str 'ECHRNG'.
+    // pub const ECHRNG_STR: &str = "ECHRNG";
 
-    /// The const str 'EL2NSYNC'.
-    pub const EL2NSYNC_STR: &str = "EL2NSYNC";
+    // /// The const str 'EL2NSYNC'.
+    // pub const EL2NSYNC_STR: &str = "EL2NSYNC";
 
-    /// The const str 'EL3HLT'.
-    pub const EL3HLT_STR: &str = "EL3HLT";
+    // /// The const str 'EL3HLT'.
+    // pub const EL3HLT_STR: &str = "EL3HLT";
 
-    /// The const str 'EL3RST'.
-    pub const EL3RST_STR: &str = "EL3RST";
+    // /// The const str 'EL3RST'.
+    // pub const EL3RST_STR: &str = "EL3RST";
 
-    /// The const str 'ELNRNG'.
-    pub const ELNRNG_STR: &str = "ELNRNG";
+    // /// The const str 'ELNRNG'.
+    // pub const ELNRNG_STR: &str = "ELNRNG";
 
-    /// The const str 'EUNATCH'.
-    pub const EUNATCH_STR: &str = "EUNATCH";
+    // /// The const str 'EUNATCH'.
+    // pub const EUNATCH_STR: &str = "EUNATCH";
 
-    /// The const str 'ENOCSI'.
-    pub const ENOCSI_STR: &str = "ENOCSI";
+    // /// The const str 'ENOCSI'.
+    // pub const ENOCSI_STR: &str = "ENOCSI";
 
-    /// The const str 'EL2HLT'.
-    pub const EL2HLT_STR: &str = "EL2HLT";
+    // /// The const str 'EL2HLT'.
+    // pub const EL2HLT_STR: &str = "EL2HLT";
 
-    /// The const str 'EBADE'.
-    pub const EBADE_STR: &str = "EBADE";
+    // /// The const str 'EBADE'.
+    // pub const EBADE_STR: &str = "EBADE";
 
-    /// The const str 'EBADR'.
-    pub const EBADR_STR: &str = "EBADR";
+    // /// The const str 'EBADR'.
+    // pub const EBADR_STR: &str = "EBADR";
 
-    /// The const str 'EXFULL'.
-    pub const EXFULL_STR: &str = "EXFULL";
+    // /// The const str 'EXFULL'.
+    // pub const EXFULL_STR: &str = "EXFULL";
 
-    /// The const str 'ENOANO'.
-    pub const ENOANO_STR: &str = "ENOANO";
+    // /// The const str 'ENOANO'.
+    // pub const ENOANO_STR: &str = "ENOANO";
 
-    /// The const str 'EBADRQC'.
-    pub const EBADRQC_STR: &str = "EBADRQC";
+    // /// The const str 'EBADRQC'.
+    // pub const EBADRQC_STR: &str = "EBADRQC";
 
-    /// The const str 'EBADSLT'.
-    pub const EBADSLT_STR: &str = "EBADSLT";
+    // /// The const str 'EBADSLT'.
+    // pub const EBADSLT_STR: &str = "EBADSLT";
 
-    /// The const str 'EBFONT'.
-    pub const EBFONT_STR: &str = "EBFONT";
+    // /// The const str 'EBFONT'.
+    // pub const EBFONT_STR: &str = "EBFONT";
 
     /// The const str 'ENOSTR'.
     pub const ENOSTR_STR: &str = "ENOSTR";
@@ -763,23 +757,26 @@ pub mod errno {
     /// The const str 'ENOSR'.
     pub const ENOSR_STR: &str = "ENOSR";
 
-    /// The const str 'ENONET'.
-    pub const ENONET_STR: &str = "ENONET";
+    // /// The const str 'ENONET'.
+    // pub const ENONET_STR: &str = "ENONET";
 
-    /// The const str 'ENOPKG'.
-    pub const ENOPKG_STR: &str = "ENOPKG";
+    // /// The const str 'ENOPKG'.
+    // pub const ENOPKG_STR: &str = "ENOPKG";
+
+    /// The const str 'EREMOTE'.
+    pub const EREMOTE_STR: &str = "EREMOTE";
 
     /// The const str 'ENOLINK'.
     pub const ENOLINK_STR: &str = "ENOLINK";
 
-    /// The const str 'EADV'.
-    pub const EADV_STR: &str = "EADV";
+    // /// The const str 'EADV'.
+    // pub const EADV_STR: &str = "EADV";
 
-    /// The const str 'ESRMNT'.
-    pub const ESRMNT_STR: &str = "ESRMNT";
+    // /// The const str 'ESRMNT'.
+    // pub const ESRMNT_STR: &str = "ESRMNT";
 
-    /// The const str 'ECOMM'.
-    pub const ECOMM_STR: &str = "ECOMM";
+    // /// The const str 'ECOMM'.
+    // pub const ECOMM_STR: &str = "ECOMM";
 
     /// The const str 'EPROTO'.
     pub const EPROTO_STR: &str = "EPROTO";
@@ -787,8 +784,8 @@ pub mod errno {
     /// The const str 'EMULTIHOP'.
     pub const EMULTIHOP_STR: &str = "EMULTIHOP";
 
-    /// The const str 'EDOTDOT'.
-    pub const EDOTDOT_STR: &str = "EDOTDOT";
+    // /// The const str 'EDOTDOT'.
+    // pub const EDOTDOT_STR: &str = "EDOTDOT";
 
     /// The const str 'EBADMSG'.
     pub const EBADMSG_STR: &str = "EBADMSG";
@@ -796,38 +793,38 @@ pub mod errno {
     /// The const str 'EOVERFLOW'.
     pub const EOVERFLOW_STR: &str = "EOVERFLOW";
 
-    /// The const str 'ENOTUNIQ'.
-    pub const ENOTUNIQ_STR: &str = "ENOTUNIQ";
+    // /// The const str 'ENOTUNIQ'.
+    // pub const ENOTUNIQ_STR: &str = "ENOTUNIQ";
 
-    /// The const str 'EBADFD'.
-    pub const EBADFD_STR: &str = "EBADFD";
+    // /// The const str 'EBADFD'.
+    // pub const EBADFD_STR: &str = "EBADFD";
 
-    /// The const str 'EREMCHG'.
-    pub const EREMCHG_STR: &str = "EREMCHG";
+    // /// The const str 'EREMCHG'.
+    // pub const EREMCHG_STR: &str = "EREMCHG";
 
-    /// The const str 'ELIBACC'.
-    pub const ELIBACC_STR: &str = "ELIBACC";
+    // /// The const str 'ELIBACC'.
+    // pub const ELIBACC_STR: &str = "ELIBACC";
 
-    /// The const str 'ELIBBAD'.
-    pub const ELIBBAD_STR: &str = "ELIBBAD";
+    // /// The const str 'ELIBBAD'.
+    // pub const ELIBBAD_STR: &str = "ELIBBAD";
 
-    /// The const str 'ELIBSCN'.
-    pub const ELIBSCN_STR: &str = "ELIBSCN";
+    // /// The const str 'ELIBSCN'.
+    // pub const ELIBSCN_STR: &str = "ELIBSCN";
 
-    /// The const str 'ELIBMAX'.
-    pub const ELIBMAX_STR: &str = "ELIBMAX";
+    // /// The const str 'ELIBMAX'.
+    // pub const ELIBMAX_STR: &str = "ELIBMAX";
 
-    /// The const str 'ELIBEXEC'.
-    pub const ELIBEXEC_STR: &str = "ELIBEXEC";
+    // /// The const str 'ELIBEXEC'.
+    // pub const ELIBEXEC_STR: &str = "ELIBEXEC";
 
     /// The const str 'EILSEQ'.
     pub const EILSEQ_STR: &str = "EILSEQ";
 
-    /// The const str 'ERESTART'.
-    pub const ERESTART_STR: &str = "ERESTART";
+    // /// The const str 'ERESTART'.
+    // pub const ERESTART_STR: &str = "ERESTART";
 
-    /// The const str 'ESTRPIPE'.
-    pub const ESTRPIPE_STR: &str = "ESTRPIPE";
+    // /// The const str 'ESTRPIPE'.
+    // pub const ESTRPIPE_STR: &str = "ESTRPIPE";
 
     /// The const str 'EUSERS'.
     pub const EUSERS_STR: &str = "EUSERS";
@@ -919,20 +916,20 @@ pub mod errno {
     /// The const str 'ESTALE'.
     pub const ESTALE_STR: &str = "ESTALE";
 
-    /// The const str 'EUCLEAN'.
-    pub const EUCLEAN_STR: &str = "EUCLEAN";
+    // /// The const str 'EUCLEAN'.
+    // pub const EUCLEAN_STR: &str = "EUCLEAN";
 
-    /// The const str 'ENOTNAM'.
-    pub const ENOTNAM_STR: &str = "ENOTNAM";
+    // /// The const str 'ENOTNAM'.
+    // pub const ENOTNAM_STR: &str = "ENOTNAM";
 
-    /// The const str 'ENAVAIL'.
-    pub const ENAVAIL_STR: &str = "ENAVAIL";
+    // /// The const str 'ENAVAIL'.
+    // pub const ENAVAIL_STR: &str = "ENAVAIL";
 
-    /// The const str 'EISNAM'.
-    pub const EISNAM_STR: &str = "EISNAM";
+    // /// The const str 'EISNAM'.
+    // pub const EISNAM_STR: &str = "EISNAM";
 
-    /// The const str 'EREMOTEIO'.
-    pub const EREMOTEIO_STR: &str = "EREMOTEIO";
+    // /// The const str 'EREMOTEIO'.
+    // pub const EREMOTEIO_STR: &str = "EREMOTEIO";
 
     /// The const str 'EOTHER'.
     pub const EOTHER_STR: &str = "EOTHER";
@@ -989,47 +986,48 @@ impl From<&ErrNo> for &'static str {
             ErrNo::WouldBlock => EWOULDBLOCK_STR,
             ErrNo::NoMsg => ENOMSG_STR,
             ErrNo::IdRm => EIDRM_STR,
-            ErrNo::ChRng => ECHRNG_STR,
-            ErrNo::L2NSync => EL2NSYNC_STR,
-            ErrNo::L3Hlt => EL3HLT_STR,
-            ErrNo::L3Rst => EL3RST_STR,
-            ErrNo::LNRng => ELNRNG_STR,
-            ErrNo::Unatch => EUNATCH_STR,
-            ErrNo::NoCSI => ENOCSI_STR,
-            ErrNo::L2Hlt => EL2HLT_STR,
-            ErrNo::BadE => EBADE_STR,
-            ErrNo::BadR => EBADR_STR,
-            ErrNo::XFull => EXFULL_STR,
-            ErrNo::NoAno => ENOANO_STR,
-            ErrNo::BadRqC => EBADRQC_STR,
-            ErrNo::BadSlt => EBADSLT_STR,
-            ErrNo::BFont => EBFONT_STR,
+            //ErrNo::ChRng => ECHRNG_STR,
+            //ErrNo::L2NSync => EL2NSYNC_STR,
+            //ErrNo::L3Hlt => EL3HLT_STR,
+            //ErrNo::L3Rst => EL3RST_STR,
+            //ErrNo::LNRng => ELNRNG_STR,
+            //ErrNo::Unatch => EUNATCH_STR,
+            //ErrNo::NoCSI => ENOCSI_STR,
+            //ErrNo::L2Hlt => EL2HLT_STR,
+            //ErrNo::BadE => EBADE_STR,
+            //ErrNo::BadR => EBADR_STR,
+            //ErrNo::XFull => EXFULL_STR,
+            //ErrNo::NoAno => ENOANO_STR,
+            //ErrNo::BadRqC => EBADRQC_STR,
+            //ErrNo::BadSlt => EBADSLT_STR,
+            //ErrNo::BFont => EBFONT_STR,
             ErrNo::NoStr => ENOSTR_STR,
             ErrNo::NoData => ENODATA_STR,
             ErrNo::Time => ETIME_STR,
             ErrNo::NoSR => ENOSR_STR,
-            ErrNo::NoNet => ENONET_STR,
-            ErrNo::NoPkg => ENOPKG_STR,
+            //ErrNo::NoNet => ENONET_STR,
+            //ErrNo::NoPkg => ENOPKG_STR,
+            ErrNo::Remote => EREMOTE_STR,
             ErrNo::NoLink => ENOLINK_STR,
-            ErrNo::Adv => EADV_STR,
-            ErrNo::SrMnt => ESRMNT_STR,
-            ErrNo::Comm => ECOMM_STR,
+            //ErrNo::Adv => EADV_STR,
+            //ErrNo::SrMnt => ESRMNT_STR,
+            //ErrNo::Comm => ECOMM_STR,
             ErrNo::Proto => EPROTO_STR,
             ErrNo::MultiHop => EMULTIHOP_STR,
-            ErrNo::DotDot => EDOTDOT_STR,
+            //ErrNo::DotDot => EDOTDOT_STR,
             ErrNo::BadMsg => EBADMSG_STR,
             ErrNo::Overflow => EOVERFLOW_STR,
-            ErrNo::NotUniq => ENOTUNIQ_STR,
-            ErrNo::BadFD => EBADFD_STR,
-            ErrNo::RemChg => EREMCHG_STR,
-            ErrNo::LibAcc => ELIBACC_STR,
-            ErrNo::LibBad => ELIBBAD_STR,
-            ErrNo::LibScn => ELIBSCN_STR,
-            ErrNo::LibMax => ELIBMAX_STR,
-            ErrNo::LibExec => ELIBEXEC_STR,
+            //ErrNo::NotUniq => ENOTUNIQ_STR,
+            //ErrNo::BadFD => EBADFD_STR,
+            //ErrNo::RemChg => EREMCHG_STR,
+            //ErrNo::LibAcc => ELIBACC_STR,
+            //ErrNo::LibBad => ELIBBAD_STR,
+            //ErrNo::LibScn => ELIBSCN_STR,
+            //ErrNo::LibMax => ELIBMAX_STR,
+            //ErrNo::LibExec => ELIBEXEC_STR,
             ErrNo::IlSeq => EILSEQ_STR,
-            ErrNo::Restart => ERESTART_STR,
-            ErrNo::StrPipe => ESTRPIPE_STR,
+            //ErrNo::Restart => ERESTART_STR,
+            //ErrNo::StrPipe => ESTRPIPE_STR,
             ErrNo::Users => EUSERS_STR,
             ErrNo::NotSock => ENOTSOCK_STR,
             ErrNo::DestAddrReq => EDESTADDRREQ_STR,
@@ -1060,11 +1058,11 @@ impl From<&ErrNo> for &'static str {
             ErrNo::Already => EALREADY_STR,
             ErrNo::InProgress => EINPROGRESS_STR,
             ErrNo::Stale => ESTALE_STR,
-            ErrNo::UClean => EUCLEAN_STR,
-            ErrNo::NotNam => ENOTNAM_STR,
-            ErrNo::NAvail => ENAVAIL_STR,
-            ErrNo::IsNam => EISNAM_STR,
-            ErrNo::RemoteIO => EREMOTEIO_STR,
+            //ErrNo::UClean => EUCLEAN_STR,
+            //ErrNo::NotNam => ENOTNAM_STR,
+            //ErrNo::NAvail => ENAVAIL_STR,
+            //ErrNo::IsNam => EISNAM_STR,
+            //ErrNo::RemoteIO => EREMOTEIO_STR,
             _ => EOTHER_STR,
         }
     }
@@ -1114,47 +1112,48 @@ impl From<&str> for ErrNo {
             EWOULDBLOCK_STR => Self::WouldBlock,
             ENOMSG_STR => Self::NoMsg,
             EIDRM_STR => Self::IdRm,
-            ECHRNG_STR => Self::ChRng,
-            EL2NSYNC_STR => Self::L2NSync,
-            EL3HLT_STR => Self::L3Hlt,
-            EL3RST_STR => Self::L3Rst,
-            ELNRNG_STR => Self::LNRng,
-            EUNATCH_STR => Self::Unatch,
-            ENOCSI_STR => Self::NoCSI,
-            EL2HLT_STR => Self::L2Hlt,
-            EBADE_STR => Self::BadE,
-            EBADR_STR => Self::BadR,
-            EXFULL_STR => Self::XFull,
-            ENOANO_STR => Self::NoAno,
-            EBADRQC_STR => Self::BadRqC,
-            EBADSLT_STR => Self::BadSlt,
-            EBFONT_STR => Self::BFont,
+            //ECHRNG_STR => Self::ChRng,
+            //EL2NSYNC_STR => Self::L2NSync,
+            //EL3HLT_STR => Self::L3Hlt,
+            //EL3RST_STR => Self::L3Rst,
+            //ELNRNG_STR => Self::LNRng,
+            //EUNATCH_STR => Self::Unatch,
+            //ENOCSI_STR => Self::NoCSI,
+            //EL2HLT_STR => Self::L2Hlt,
+            //EBADE_STR => Self::BadE,
+            //EBADR_STR => Self::BadR,
+            //EXFULL_STR => Self::XFull,
+            //ENOANO_STR => Self::NoAno,
+            //EBADRQC_STR => Self::BadRqC,
+            //EBADSLT_STR => Self::BadSlt,
+            //EBFONT_STR => Self::BFont,
             ENOSTR_STR => Self::NoStr,
             ENODATA_STR => Self::NoData,
             ETIME_STR => Self::Time,
             ENOSR_STR => Self::NoSR,
-            ENONET_STR => Self::NoNet,
-            ENOPKG_STR => Self::NoPkg,
+            //ENONET_STR => Self::NoNet,
+            //ENOPKG_STR => Self::NoPkg,
+            EREMOTE_STR => Self::Remote,
             ENOLINK_STR => Self::NoLink,
-            EADV_STR => Self::Adv,
-            ESRMNT_STR => Self::SrMnt,
-            ECOMM_STR => Self::Comm,
+            //EADV_STR => Self::Adv,
+            //ESRMNT_STR => Self::SrMnt,
+            //ECOMM_STR => Self::Comm,
             EPROTO_STR => Self::Proto,
             EMULTIHOP_STR => Self::MultiHop,
-            EDOTDOT_STR => Self::DotDot,
+            //EDOTDOT_STR => Self::DotDot,
             EBADMSG_STR => Self::BadMsg,
             EOVERFLOW_STR => Self::Overflow,
-            ENOTUNIQ_STR => Self::NotUniq,
-            EBADFD_STR => Self::BadFD,
-            EREMCHG_STR => Self::RemChg,
-            ELIBACC_STR => Self::LibAcc,
-            ELIBBAD_STR => Self::LibBad,
-            ELIBSCN_STR => Self::LibScn,
-            ELIBMAX_STR => Self::LibMax,
-            ELIBEXEC_STR => Self::LibExec,
+            //ENOTUNIQ_STR => Self::NotUniq,
+            //EBADFD_STR => Self::BadFD,
+            //EREMCHG_STR => Self::RemChg,
+            //ELIBACC_STR => Self::LibAcc,
+            //ELIBBAD_STR => Self::LibBad,
+            //ELIBSCN_STR => Self::LibScn,
+            //ELIBMAX_STR => Self::LibMax,
+            //ELIBEXEC_STR => Self::LibExec,
             EILSEQ_STR => Self::IlSeq,
-            ERESTART_STR => Self::Restart,
-            ESTRPIPE_STR => Self::StrPipe,
+            //ERESTART_STR => Self::Restart,
+            //ESTRPIPE_STR => Self::StrPipe,
             EUSERS_STR => Self::Users,
             ENOTSOCK_STR => Self::NotSock,
             EDESTADDRREQ_STR => Self::DestAddrReq,
@@ -1185,11 +1184,11 @@ impl From<&str> for ErrNo {
             EALREADY_STR => Self::Already,
             EINPROGRESS_STR => Self::InProgress,
             ESTALE_STR => Self::Stale,
-            EUCLEAN_STR => Self::UClean,
-            ENOTNAM_STR => Self::NotNam,
-            ENAVAIL_STR => Self::NAvail,
-            EISNAM_STR => Self::IsNam,
-            EREMOTEIO_STR => Self::RemoteIO,
+            //EUCLEAN_STR => Self::UClean,
+            //ENOTNAM_STR => Self::NotNam,
+            //ENAVAIL_STR => Self::NAvail,
+            //EISNAM_STR => Self::IsNam,
+            //EREMOTEIO_STR => Self::RemoteIO,
             _ => Self::Other,
         }
     }
