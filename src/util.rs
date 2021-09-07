@@ -2,8 +2,7 @@
 pub(crate) type TopMap = indexmap::IndexMap<Box<str>, serde_json::Value>;
 
 #[cfg(not(feature = "preserve_order"))]
-pub(crate) type TopMap =
-    std::collections::HashMap<Box<str>, serde_json::Value>;
+pub(crate) type TopMap = std::collections::HashMap<Box<str>, serde_json::Value>;
 
 #[cfg(feature = "std")]
 pub(crate) struct IoToFmt<'ltr, 'ltf>(pub &'ltr mut std::fmt::Formatter<'ltf>);
@@ -63,77 +62,71 @@ pub(crate) fn fmt_debug_alt<'a, T: ?Sized + serde::Serialize>(
     }
 }
 
-/*
-const NOT_FOUND: &str = "NotFound";
-const PERMISSION_DENIED: &str = "PermissionDenied";
-const CONNECTION_REFUSED: &str = "ConnectionRefused";
-const CONNECTION_RESET: &str = "ConnectionReset";
-const CONNECTION_ABORTED: &str = "ConnectionAborted";
-const NOT_CONNECTED: &str = "NotConnected";
-const ADDR_IN_USE: &str = "AddrInUse";
-const ADDR_NOT_AVAILABLE: &str = "AddrNotAvailable";
-const BROKEN_PIPE: &str = "BrokenPipe";
-const ALREADY_EXISTS: &str = "AlreadyExists";
-const WOULD_BLOCK: &str = "WouldBlock";
-const INVALID_INPUT: &str = "InvalidInput";
-const INVALID_DATA: &str = "InvalidData";
-const TIMED_OUT: &str = "TimedOut";
-const WRITE_ZERO: &str = "WriteZero";
-const INTERRUPTED: &str = "Interrupted";
-const UNEXPECTED_EOF: &str = "UnexpectedEof";
-const UNSUPPORTED: &str = "Unsupported";
-const OUT_OF_MEMORY: &str = "OutOfMemory";
-const OTHER: &str = "Other";
+use crate::io_error::*;
 
 pub(crate) fn err_kind_to_str(kind: std::io::ErrorKind) -> &'static str {
     use std::io::ErrorKind::*;
     match kind {
-        NotFound => NOT_FOUND,
-        PermissionDenied => PERMISSION_DENIED,
-        ConnectionRefused => CONNECTION_REFUSED,
-        ConnectionReset => CONNECTION_RESET,
-        ConnectionAborted => CONNECTION_ABORTED,
-        NotConnected => NOT_CONNECTED,
-        AddrInUse => ADDR_IN_USE,
-        AddrNotAvailable => ADDR_NOT_AVAILABLE,
-        BrokenPipe => BROKEN_PIPE,
-        AlreadyExists => ALREADY_EXISTS,
-        WouldBlock => WOULD_BLOCK,
-        InvalidInput => INVALID_INPUT,
-        InvalidData => INVALID_DATA,
-        TimedOut => TIMED_OUT,
-        WriteZero => WRITE_ZERO,
-        Interrupted => INTERRUPTED,
-        UnexpectedEof => UNEXPECTED_EOF,
-        Unsupported => UNSUPPORTED,
-        OutOfMemory => OUT_OF_MEMORY,
-        _ => OTHER,
+        NotFound => NOT_FOUND_STR,
+        PermissionDenied => PERMISSION_DENIED_STR,
+        ConnectionRefused => CONNECTION_REFUSED_STR,
+        ConnectionReset => CONNECTION_RESET_STR,
+        ConnectionAborted => CONNECTION_ABORTED_STR,
+        NotConnected => NOT_CONNECTED_STR,
+        AddrInUse => ADDR_IN_USE_STR,
+        AddrNotAvailable => ADDR_NOT_AVAILABLE_STR,
+        BrokenPipe => BROKEN_PIPE_STR,
+        AlreadyExists => ALREADY_EXISTS_STR,
+        WouldBlock => WOULD_BLOCK_STR,
+        InvalidInput => INVALID_INPUT_STR,
+        InvalidData => INVALID_DATA_STR,
+        TimedOut => TIMED_OUT_STR,
+        WriteZero => WRITE_ZERO_STR,
+        Interrupted => INTERRUPTED_STR,
+        UnexpectedEof => UNEXPECTED_EOF_STR,
+        Unsupported => UNSUPPORTED_STR,
+        OutOfMemory => OUT_OF_MEMORY_STR,
+        _ => OTHER_STR,
     }
 }
 
-pub(crate) fn str_kind_to_err(kind: &str) -> std::io::ErrorKind {
+pub(crate) fn parse_err_str(
+    s: &str,
+) -> (std::io::ErrorKind, Option<crate::ErrNo>) {
     use std::io::ErrorKind::*;
-    match kind {
-        NOT_FOUND => NotFound,
-        PERMISSION_DENIED => PermissionDenied,
-        CONNECTION_REFUSED => ConnectionRefused,
-        CONNECTION_RESET => ConnectionReset,
-        CONNECTION_ABORTED => ConnectionAborted,
-        NOT_CONNECTED => NotConnected,
-        ADDR_IN_USE => AddrInUse,
-        ADDR_NOT_AVAILABLE => AddrNotAvailable,
-        BROKEN_PIPE => BrokenPipe,
-        ALREADY_EXISTS => AlreadyExists,
-        WOULD_BLOCK => WouldBlock,
-        INVALID_INPUT => InvalidInput,
-        INVALID_DATA => InvalidData,
-        TIMED_OUT => TimedOut,
-        WRITE_ZERO => WriteZero,
-        INTERRUPTED => Interrupted,
-        UNEXPECTED_EOF => UnexpectedEof,
-        UNSUPPORTED => Unsupported,
-        OUT_OF_MEMORY => OutOfMemory,
+    let kind = match s {
+        NOT_FOUND_STR => NotFound,
+        PERMISSION_DENIED_STR => PermissionDenied,
+        CONNECTION_REFUSED_STR => ConnectionRefused,
+        CONNECTION_RESET_STR => ConnectionReset,
+        CONNECTION_ABORTED_STR => ConnectionAborted,
+        NOT_CONNECTED_STR => NotConnected,
+        ADDR_IN_USE_STR => AddrInUse,
+        ADDR_NOT_AVAILABLE_STR => AddrNotAvailable,
+        BROKEN_PIPE_STR => BrokenPipe,
+        ALREADY_EXISTS_STR => AlreadyExists,
+        WOULD_BLOCK_STR => WouldBlock,
+        INVALID_INPUT_STR => InvalidInput,
+        INVALID_DATA_STR => InvalidData,
+        TIMED_OUT_STR => TimedOut,
+        WRITE_ZERO_STR => WriteZero,
+        INTERRUPTED_STR => Interrupted,
+        UNEXPECTED_EOF_STR => UnexpectedEof,
+        UNSUPPORTED_STR => Unsupported,
+        OUT_OF_MEMORY_STR => OutOfMemory,
         _ => Other,
-    }
+    };
+
+    let os = if let Other = kind {
+        let os = crate::ErrNo::from(s);
+        if let crate::ErrNo::Other = os {
+            None
+        } else {
+            Some(os)
+        }
+    } else {
+        None
+    };
+
+    (kind, os)
 }
-*/

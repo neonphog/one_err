@@ -1,19 +1,27 @@
 [package]
 name = "one_err"
 version = "0.0.1"
+authors = ["neonphog <neonphog@gmail.com>"]
 edition = "2018"
+description = "OneErr to rule them all"
+keywords = ["error"]
+categories = ["rust-patterns"]
+license = "Apache-2.0"
+readme = "README.md"
+documentation = "https://docs.rs/one_err"
+repository = "https://github.com/neonphog/one_err"
 
 [dependencies]
 indexmap = { version = "1.5", optional = true }
-libc = "0.2.101"
+libc = { version = "0.2.101", default-features = false }
 serde = { version = "1", default-features = false }
 serde_json = { version = "1", default-features = false }
 
 [dev-dependencies]
 
 [features]
-default = ["alloc"]
+default = ["std", "preserve_order"]
 
-std = ["serde/std", "serde_json/std"]
+std = ["libc/std", "serde/std", "serde_json/std"]
 alloc = ["serde/alloc", "serde_json/alloc"]
 preserve_order = ["indexmap", "serde_json/preserve_order"]
