@@ -8,6 +8,8 @@ const EPERM_2: i32 = libc::EACCES;
 const EWOULDBLOCK_1: i32 = libc::EAGAIN;
 const EWOULDBLOCK_2: i32 = libc::EWOULDBLOCK;
 const EDEADLOCK_1: i32 = libc::EDEADLK;
+
+#[cfg(unix)]
 const EDEADLOCK_2: i32 = libc::EDEADLOCK;
 
 // incase we get an errno not in our list
@@ -506,6 +508,9 @@ impl From<i32> for ErrNo {
             //libc::EISNAM => Self::IsNam,
             //libc::EREMOTEIO => Self::RemoteIO,
             x if x == EPERM_1 || x == EPERM_2 => Self::Perm,
+            #[cfg(not(unix))]
+            x if x == EDEADLOCK_1 => Self::DeadLk,
+            #[cfg(unix)]
             x if x == EDEADLOCK_1 || x == EDEADLOCK_2 => Self::DeadLk,
             x if x == EWOULDBLOCK_1 || x == EWOULDBLOCK_2 => Self::WouldBlock,
             _ => Self::Other,
