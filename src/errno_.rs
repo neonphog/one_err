@@ -56,9 +56,8 @@ pub enum ErrNo {
     /// Bad address
     Fault = libc::EFAULT,
 
-    /// Block device required
-    NotBlk = libc::ENOTBLK,
-
+    // /// Block device required
+    // NotBlk = libc::ENOTBLK,
     /// Device or resource busy
     Busy = libc::EBUSY,
 
@@ -204,9 +203,8 @@ pub enum ErrNo {
 
     // /// Package not installed
     // NoPkg = libc::ENOPKG,
-    /// Object is remote
-    Remote = libc::EREMOTE,
-
+    // /// Object is remote
+    // Remote = libc::EREMOTE,
     /// Link has been severed
     NoLink = libc::ENOLINK,
 
@@ -221,8 +219,8 @@ pub enum ErrNo {
     /// Protocol error
     Proto = libc::EPROTO,
 
-    /// Multihop attempted
-    MultiHop = libc::EMULTIHOP,
+    // /// Multihop attempted
+    // MultiHop = libc::EMULTIHOP,
 
     // /// RFS specific error
     // DotDot = libc::EDOTDOT,
@@ -263,9 +261,8 @@ pub enum ErrNo {
 
     // /// Streams pipe error
     // StrPipe = libc::ESTRPIPE,
-    /// Too many users
-    Users = libc::EUSERS,
-
+    // /// Too many users
+    // Users = libc::EUSERS,
     /// Socket operation on non-socket
     NotSock = libc::ENOTSOCK,
 
@@ -284,15 +281,13 @@ pub enum ErrNo {
     /// Protocol not supported
     ProtoNoSupport = libc::EPROTONOSUPPORT,
 
-    /// Socket type not supported
-    SockTNoSupport = libc::ESOCKTNOSUPPORT,
-
+    // /// Socket type not supported
+    // SockTNoSupport = libc::ESOCKTNOSUPPORT,
     /// Operation not supported on transport endpoint
     OpNotSupp = libc::EOPNOTSUPP,
 
-    /// Protocol family not supported
-    PFNoSupport = libc::EPFNOSUPPORT,
-
+    // /// Protocol family not supported
+    // PFNoSupport = libc::EPFNOSUPPORT,
     /// Address family not supported by protocol
     AFNoSupport = libc::EAFNOSUPPORT,
 
@@ -326,21 +321,19 @@ pub enum ErrNo {
     /// Transport endpoint is not connected
     NotConn = libc::ENOTCONN,
 
-    /// Cannot send after transport endpoint shutdown
-    Shutdown = libc::ESHUTDOWN,
+    // /// Cannot send after transport endpoint shutdown
+    // Shutdown = libc::ESHUTDOWN,
 
-    /// Too many references: cannot splice
-    TooManyRefs = libc::ETOOMANYREFS,
-
+    // /// Too many references: cannot splice
+    // TooManyRefs = libc::ETOOMANYREFS,
     /// Connection timed out
     TimedOut = libc::ETIMEDOUT,
 
     /// Connection refused
     ConnRefused = libc::ECONNREFUSED,
 
-    /// Host is down
-    HostDown = libc::EHOSTDOWN,
-
+    // /// Host is down
+    // HostDown = libc::EHOSTDOWN,
     /// No route to host
     HostUnreach = libc::EHOSTUNREACH,
 
@@ -350,8 +343,8 @@ pub enum ErrNo {
     /// Operation now in progress
     InProgress = libc::EINPROGRESS,
 
-    /// Stale NFS file handle
-    Stale = libc::ESTALE,
+    // /// Stale NFS file handle
+    // Stale = libc::ESTALE,
 
     // /// Structure needs cleaning
     // UClean = libc::EUCLEAN,
@@ -403,7 +396,7 @@ impl From<i32> for ErrNo {
             libc::ECHILD => Self::Child,
             libc::ENOMEM => Self::NoMem,
             libc::EFAULT => Self::Fault,
-            libc::ENOTBLK => Self::NotBlk,
+            // libc::ENOTBLK => Self::NotBlk,
             libc::EBUSY => Self::Busy,
             libc::EEXIST => Self::Exist,
             libc::EXDEV => Self::XDev,
@@ -451,13 +444,13 @@ impl From<i32> for ErrNo {
             libc::ENOSR => Self::NoSR,
             //libc::ENONET => Self::NoNet,
             //libc::ENOPKG => Self::NoPkg,
-            libc::EREMOTE => Self::Remote,
+            //libc::EREMOTE => Self::Remote,
             libc::ENOLINK => Self::NoLink,
             //libc::EADV => Self::Adv,
             //libc::ESRMNT => Self::SrMnt,
             //libc::ECOMM => Self::Comm,
             libc::EPROTO => Self::Proto,
-            libc::EMULTIHOP => Self::MultiHop,
+            //libc::EMULTIHOP => Self::MultiHop,
             //libc::EDOTDOT => Self::DotDot,
             libc::EBADMSG => Self::BadMsg,
             libc::EOVERFLOW => Self::Overflow,
@@ -472,16 +465,16 @@ impl From<i32> for ErrNo {
             libc::EILSEQ => Self::IlSeq,
             //libc::ERESTART => Self::Restart,
             //libc::ESTRPIPE => Self::StrPipe,
-            libc::EUSERS => Self::Users,
+            //libc::EUSERS => Self::Users,
             libc::ENOTSOCK => Self::NotSock,
             libc::EDESTADDRREQ => Self::DestAddrReq,
             libc::EMSGSIZE => Self::MsgSize,
             libc::EPROTOTYPE => Self::ProtoType,
             libc::ENOPROTOOPT => Self::NoProtoOpt,
             libc::EPROTONOSUPPORT => Self::ProtoNoSupport,
-            libc::ESOCKTNOSUPPORT => Self::SockTNoSupport,
+            //libc::ESOCKTNOSUPPORT => Self::SockTNoSupport,
             libc::EOPNOTSUPP => Self::OpNotSupp,
-            libc::EPFNOSUPPORT => Self::PFNoSupport,
+            //libc::EPFNOSUPPORT => Self::PFNoSupport,
             libc::EAFNOSUPPORT => Self::AFNoSupport,
             libc::EADDRINUSE => Self::AddrInUse,
             libc::EADDRNOTAVAIL => Self::AddrNotAvail,
@@ -493,15 +486,15 @@ impl From<i32> for ErrNo {
             libc::ENOBUFS => Self::NoBufS,
             libc::EISCONN => Self::IsConn,
             libc::ENOTCONN => Self::NotConn,
-            libc::ESHUTDOWN => Self::Shutdown,
-            libc::ETOOMANYREFS => Self::TooManyRefs,
+            //libc::ESHUTDOWN => Self::Shutdown,
+            //libc::ETOOMANYREFS => Self::TooManyRefs,
             libc::ETIMEDOUT => Self::TimedOut,
             libc::ECONNREFUSED => Self::ConnRefused,
-            libc::EHOSTDOWN => Self::HostDown,
+            //libc::EHOSTDOWN => Self::HostDown,
             libc::EHOSTUNREACH => Self::HostUnreach,
             libc::EALREADY => Self::Already,
             libc::EINPROGRESS => Self::InProgress,
-            libc::ESTALE => Self::Stale,
+            //libc::ESTALE => Self::Stale,
             //libc::EUCLEAN => Self::UClean,
             //libc::ENOTNAM => Self::NotNam,
             //libc::ENAVAIL => Self::NAvail,
@@ -618,8 +611,8 @@ pub mod errno {
     /// The const str 'EFAULT'.
     pub const EFAULT_STR: &str = "EFAULT";
 
-    /// The const str 'ENOTBLK'.
-    pub const ENOTBLK_STR: &str = "ENOTBLK";
+    // /// The const str 'ENOTBLK'.
+    // pub const ENOTBLK_STR: &str = "ENOTBLK";
 
     /// The const str 'EBUSY'.
     pub const EBUSY_STR: &str = "EBUSY";
@@ -768,8 +761,8 @@ pub mod errno {
     // /// The const str 'ENOPKG'.
     // pub const ENOPKG_STR: &str = "ENOPKG";
 
-    /// The const str 'EREMOTE'.
-    pub const EREMOTE_STR: &str = "EREMOTE";
+    // /// The const str 'EREMOTE'.
+    // pub const EREMOTE_STR: &str = "EREMOTE";
 
     /// The const str 'ENOLINK'.
     pub const ENOLINK_STR: &str = "ENOLINK";
@@ -786,8 +779,8 @@ pub mod errno {
     /// The const str 'EPROTO'.
     pub const EPROTO_STR: &str = "EPROTO";
 
-    /// The const str 'EMULTIHOP'.
-    pub const EMULTIHOP_STR: &str = "EMULTIHOP";
+    // /// The const str 'EMULTIHOP'.
+    // pub const EMULTIHOP_STR: &str = "EMULTIHOP";
 
     // /// The const str 'EDOTDOT'.
     // pub const EDOTDOT_STR: &str = "EDOTDOT";
@@ -831,8 +824,8 @@ pub mod errno {
     // /// The const str 'ESTRPIPE'.
     // pub const ESTRPIPE_STR: &str = "ESTRPIPE";
 
-    /// The const str 'EUSERS'.
-    pub const EUSERS_STR: &str = "EUSERS";
+    // /// The const str 'EUSERS'.
+    // pub const EUSERS_STR: &str = "EUSERS";
 
     /// The const str 'ENOTSOCK'.
     pub const ENOTSOCK_STR: &str = "ENOTSOCK";
@@ -852,14 +845,14 @@ pub mod errno {
     /// The const str 'EPROTONOSUPPORT'.
     pub const EPROTONOSUPPORT_STR: &str = "EPROTONOSUPPORT";
 
-    /// The const str 'ESOCKTNOSUPPORT'.
-    pub const ESOCKTNOSUPPORT_STR: &str = "ESOCKTNOSUPPORT";
+    // /// The const str 'ESOCKTNOSUPPORT'.
+    // pub const ESOCKTNOSUPPORT_STR: &str = "ESOCKTNOSUPPORT";
 
     /// The const str 'EOPNOTSUPP'.
     pub const EOPNOTSUPP_STR: &str = "EOPNOTSUPP";
 
-    /// The const str 'EPFNOSUPPORT'.
-    pub const EPFNOSUPPORT_STR: &str = "EPFNOSUPPORT";
+    // /// The const str 'EPFNOSUPPORT'.
+    // pub const EPFNOSUPPORT_STR: &str = "EPFNOSUPPORT";
 
     /// The const str 'EAFNOSUPPORT'.
     pub const EAFNOSUPPORT_STR: &str = "EAFNOSUPPORT";
@@ -894,11 +887,11 @@ pub mod errno {
     /// The const str 'ENOTCONN'.
     pub const ENOTCONN_STR: &str = "ENOTCONN";
 
-    /// The const str 'ESHUTDOWN'.
-    pub const ESHUTDOWN_STR: &str = "ESHUTDOWN";
+    // /// The const str 'ESHUTDOWN'.
+    // pub const ESHUTDOWN_STR: &str = "ESHUTDOWN";
 
-    /// The const str 'ETOOMANYREFS'.
-    pub const ETOOMANYREFS_STR: &str = "ETOOMANYREFS";
+    // /// The const str 'ETOOMANYREFS'.
+    // pub const ETOOMANYREFS_STR: &str = "ETOOMANYREFS";
 
     /// The const str 'ETIMEDOUT'.
     pub const ETIMEDOUT_STR: &str = "ETIMEDOUT";
@@ -906,8 +899,8 @@ pub mod errno {
     /// The const str 'ECONNREFUSED'.
     pub const ECONNREFUSED_STR: &str = "ECONNREFUSED";
 
-    /// The const str 'EHOSTDOWN'.
-    pub const EHOSTDOWN_STR: &str = "EHOSTDOWN";
+    // /// The const str 'EHOSTDOWN'.
+    // pub const EHOSTDOWN_STR: &str = "EHOSTDOWN";
 
     /// The const str 'EHOSTUNREACH'.
     pub const EHOSTUNREACH_STR: &str = "EHOSTUNREACH";
@@ -918,8 +911,8 @@ pub mod errno {
     /// The const str 'EINPROGRESS'.
     pub const EINPROGRESS_STR: &str = "EINPROGRESS";
 
-    /// The const str 'ESTALE'.
-    pub const ESTALE_STR: &str = "ESTALE";
+    // /// The const str 'ESTALE'.
+    // pub const ESTALE_STR: &str = "ESTALE";
 
     // /// The const str 'EUCLEAN'.
     // pub const EUCLEAN_STR: &str = "EUCLEAN";
@@ -962,7 +955,7 @@ impl From<&ErrNo> for &'static str {
             ErrNo::Child => ECHILD_STR,
             ErrNo::NoMem => ENOMEM_STR,
             ErrNo::Fault => EFAULT_STR,
-            ErrNo::NotBlk => ENOTBLK_STR,
+            // ErrNo::NotBlk => ENOTBLK_STR,
             ErrNo::Busy => EBUSY_STR,
             ErrNo::Exist => EEXIST_STR,
             ErrNo::XDev => EXDEV_STR,
@@ -1012,13 +1005,13 @@ impl From<&ErrNo> for &'static str {
             ErrNo::NoSR => ENOSR_STR,
             //ErrNo::NoNet => ENONET_STR,
             //ErrNo::NoPkg => ENOPKG_STR,
-            ErrNo::Remote => EREMOTE_STR,
+            //ErrNo::Remote => EREMOTE_STR,
             ErrNo::NoLink => ENOLINK_STR,
             //ErrNo::Adv => EADV_STR,
             //ErrNo::SrMnt => ESRMNT_STR,
             //ErrNo::Comm => ECOMM_STR,
             ErrNo::Proto => EPROTO_STR,
-            ErrNo::MultiHop => EMULTIHOP_STR,
+            //ErrNo::MultiHop => EMULTIHOP_STR,
             //ErrNo::DotDot => EDOTDOT_STR,
             ErrNo::BadMsg => EBADMSG_STR,
             ErrNo::Overflow => EOVERFLOW_STR,
@@ -1033,16 +1026,16 @@ impl From<&ErrNo> for &'static str {
             ErrNo::IlSeq => EILSEQ_STR,
             //ErrNo::Restart => ERESTART_STR,
             //ErrNo::StrPipe => ESTRPIPE_STR,
-            ErrNo::Users => EUSERS_STR,
+            //ErrNo::Users => EUSERS_STR,
             ErrNo::NotSock => ENOTSOCK_STR,
             ErrNo::DestAddrReq => EDESTADDRREQ_STR,
             ErrNo::MsgSize => EMSGSIZE_STR,
             ErrNo::ProtoType => EPROTOTYPE_STR,
             ErrNo::NoProtoOpt => ENOPROTOOPT_STR,
             ErrNo::ProtoNoSupport => EPROTONOSUPPORT_STR,
-            ErrNo::SockTNoSupport => ESOCKTNOSUPPORT_STR,
+            //ErrNo::SockTNoSupport => ESOCKTNOSUPPORT_STR,
             ErrNo::OpNotSupp => EOPNOTSUPP_STR,
-            ErrNo::PFNoSupport => EPFNOSUPPORT_STR,
+            //ErrNo::PFNoSupport => EPFNOSUPPORT_STR,
             ErrNo::AFNoSupport => EAFNOSUPPORT_STR,
             ErrNo::AddrInUse => EADDRINUSE_STR,
             ErrNo::AddrNotAvail => EADDRNOTAVAIL_STR,
@@ -1054,15 +1047,15 @@ impl From<&ErrNo> for &'static str {
             ErrNo::NoBufS => ENOBUFS_STR,
             ErrNo::IsConn => EISCONN_STR,
             ErrNo::NotConn => ENOTCONN_STR,
-            ErrNo::Shutdown => ESHUTDOWN_STR,
-            ErrNo::TooManyRefs => ETOOMANYREFS_STR,
+            //ErrNo::Shutdown => ESHUTDOWN_STR,
+            //ErrNo::TooManyRefs => ETOOMANYREFS_STR,
             ErrNo::TimedOut => ETIMEDOUT_STR,
             ErrNo::ConnRefused => ECONNREFUSED_STR,
-            ErrNo::HostDown => EHOSTDOWN_STR,
+            //ErrNo::HostDown => EHOSTDOWN_STR,
             ErrNo::HostUnreach => EHOSTUNREACH_STR,
             ErrNo::Already => EALREADY_STR,
             ErrNo::InProgress => EINPROGRESS_STR,
-            ErrNo::Stale => ESTALE_STR,
+            //ErrNo::Stale => ESTALE_STR,
             //ErrNo::UClean => EUCLEAN_STR,
             //ErrNo::NotNam => ENOTNAM_STR,
             //ErrNo::NAvail => ENAVAIL_STR,
@@ -1088,7 +1081,7 @@ impl From<&str> for ErrNo {
             ECHILD_STR => Self::Child,
             ENOMEM_STR => Self::NoMem,
             EFAULT_STR => Self::Fault,
-            ENOTBLK_STR => Self::NotBlk,
+            // ENOTBLK_STR => Self::NotBlk,
             EBUSY_STR => Self::Busy,
             EEXIST_STR => Self::Exist,
             EXDEV_STR => Self::XDev,
@@ -1138,13 +1131,13 @@ impl From<&str> for ErrNo {
             ENOSR_STR => Self::NoSR,
             //ENONET_STR => Self::NoNet,
             //ENOPKG_STR => Self::NoPkg,
-            EREMOTE_STR => Self::Remote,
+            //EREMOTE_STR => Self::Remote,
             ENOLINK_STR => Self::NoLink,
             //EADV_STR => Self::Adv,
             //ESRMNT_STR => Self::SrMnt,
             //ECOMM_STR => Self::Comm,
             EPROTO_STR => Self::Proto,
-            EMULTIHOP_STR => Self::MultiHop,
+            //EMULTIHOP_STR => Self::MultiHop,
             //EDOTDOT_STR => Self::DotDot,
             EBADMSG_STR => Self::BadMsg,
             EOVERFLOW_STR => Self::Overflow,
@@ -1159,16 +1152,16 @@ impl From<&str> for ErrNo {
             EILSEQ_STR => Self::IlSeq,
             //ERESTART_STR => Self::Restart,
             //ESTRPIPE_STR => Self::StrPipe,
-            EUSERS_STR => Self::Users,
+            //EUSERS_STR => Self::Users,
             ENOTSOCK_STR => Self::NotSock,
             EDESTADDRREQ_STR => Self::DestAddrReq,
             EMSGSIZE_STR => Self::MsgSize,
             EPROTOTYPE_STR => Self::ProtoType,
             ENOPROTOOPT_STR => Self::NoProtoOpt,
             EPROTONOSUPPORT_STR => Self::ProtoNoSupport,
-            ESOCKTNOSUPPORT_STR => Self::SockTNoSupport,
+            //ESOCKTNOSUPPORT_STR => Self::SockTNoSupport,
             EOPNOTSUPP_STR => Self::OpNotSupp,
-            EPFNOSUPPORT_STR => Self::PFNoSupport,
+            //EPFNOSUPPORT_STR => Self::PFNoSupport,
             EAFNOSUPPORT_STR => Self::AFNoSupport,
             EADDRINUSE_STR => Self::AddrInUse,
             EADDRNOTAVAIL_STR => Self::AddrNotAvail,
@@ -1180,15 +1173,15 @@ impl From<&str> for ErrNo {
             ENOBUFS_STR => Self::NoBufS,
             EISCONN_STR => Self::IsConn,
             ENOTCONN_STR => Self::NotConn,
-            ESHUTDOWN_STR => Self::Shutdown,
-            ETOOMANYREFS_STR => Self::TooManyRefs,
+            //ESHUTDOWN_STR => Self::Shutdown,
+            //ETOOMANYREFS_STR => Self::TooManyRefs,
             ETIMEDOUT_STR => Self::TimedOut,
             ECONNREFUSED_STR => Self::ConnRefused,
-            EHOSTDOWN_STR => Self::HostDown,
+            //EHOSTDOWN_STR => Self::HostDown,
             EHOSTUNREACH_STR => Self::HostUnreach,
             EALREADY_STR => Self::Already,
             EINPROGRESS_STR => Self::InProgress,
-            ESTALE_STR => Self::Stale,
+            //ESTALE_STR => Self::Stale,
             //EUCLEAN_STR => Self::UClean,
             //ENOTNAM_STR => Self::NotNam,
             //ENAVAIL_STR => Self::NAvail,
