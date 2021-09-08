@@ -1,8 +1,8 @@
 #[cfg(feature = "preserve_order")]
-pub(crate) type TopMap = indexmap::IndexMap<Box<str>, serde_json::Value>;
+pub(crate) type TopMap = indexmap::IndexMap<Box<str>, crate::Value>;
 
 #[cfg(not(feature = "preserve_order"))]
-pub(crate) type TopMap = std::collections::HashMap<Box<str>, serde_json::Value>;
+pub(crate) type TopMap = std::collections::HashMap<Box<str>, crate::Value>;
 
 #[cfg(feature = "std")]
 pub(crate) struct IoToFmt<'ltr, 'ltf>(pub &'ltr mut std::fmt::Formatter<'ltf>);

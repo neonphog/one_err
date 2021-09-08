@@ -69,8 +69,8 @@ for res in [
 ] {
     match res.as_ref().map_err(|e| (e.str_kind(), e)) {
         Ok(ok) => assert_eq!("not-error", *ok),
-        Err((ERR_FOO, e)) => assert_eq!("foo test", e.get_message()),
-        Err((ERR_BAR, e)) => assert_eq!("bar test", e.get_message()),
+        Err((ERR_FOO, e)) => assert_eq!("foo test", e.get_message().unwrap()),
+        Err((ERR_BAR, e)) => assert_eq!("bar test", e.get_message().unwrap()),
         oth => panic!("unexpected: {:?}", oth),
     }
 }

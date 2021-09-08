@@ -1,6 +1,6 @@
 use crate::*;
 
-#[derive(Clone, PartialEq, Eq)]
+#[derive(Clone, PartialEq)]
 pub(crate) struct OneErrInner(pub(crate) Box<Option<TopMap>>);
 
 impl OneErrInner {
@@ -10,7 +10,7 @@ impl OneErrInner {
 
     pub fn set_field<T>(&mut self, name: Box<str>, t: T)
     where
-        T: Into<serde_json::Value>,
+        T: Into<Value>,
     {
         if self.0.is_none() {
             self.0 = Box::new(Some(TopMap::new()));
@@ -18,11 +18,18 @@ impl OneErrInner {
         self.0.as_mut().as_mut().unwrap().insert(name, t.into());
     }
 
-    pub fn get_field(&self, name: &str) -> Option<&serde_json::Value> {
+    pub fn get_field<'lt, V>(&'lt self, name: &str) -> Option<V>
+    where
+        Option<V>: From<&'lt Value>,
+    {
         if let Some(f) = &*self.0 {
-            return f.get(name);
+            match f.get(name) {
+                None => None,
+                Some(v) => v.into(),
+            }
+        } else {
+            None
         }
-        None
     }
 }
 

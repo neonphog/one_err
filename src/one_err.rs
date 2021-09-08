@@ -66,7 +66,7 @@ impl From<ErrNo> for OneErr {
             if let ErrNo::Other = e {
                 /* pass */
             } else {
-                inner.set_field(OS.into(), i32::from(&e));
+                inner.set_field(OS.into(), i32::from(&e) as i64);
             }
         }
 
@@ -227,8 +227,7 @@ impl<'de> serde::Deserialize<'de> for OneErr {
             {
                 let mut out_map = TopMap::new();
                 loop {
-                    let r: Option<(Box<str>, serde_json::Value)> =
-                        access.next_entry()?;
+                    let r: Option<(Box<str>, Value)> = access.next_entry()?;
                     match r {
                         None => break,
                         Some((k, v)) => {
@@ -245,7 +244,8 @@ impl<'de> serde::Deserialize<'de> for OneErr {
                 let (kind, os) = parse_err_str(error);
                 if let Some(os) = os {
                     if let std::io::ErrorKind::Other = kind {
-                        top_map.insert(OS.into(), i32::from(&os).into());
+                        top_map
+                            .insert(OS.into(), (i32::from(&os) as i64).into());
                     }
                 } else {
                     if let std::io::ErrorKind::Other = kind {
@@ -322,10 +322,8 @@ impl OneErr {
     pub fn errno(&self) -> ErrNo {
         let inner = self.priv_as_inner();
 
-        if let Some(os) = inner.get_field(OS) {
-            if let Some(os) = os.as_i64() {
-                return ErrNo::from(os as i32);
-            }
+        if let Some(os) = inner.get_field::<i64>(OS) {
+            return ErrNo::from(os as i32);
         }
 
         ErrNo::from(self.0.kind())
@@ -337,17 +335,13 @@ impl OneErr {
     pub fn str_kind(&self) -> &str {
         let inner = self.priv_as_inner();
 
-        if let Some(e_str) = inner.get_field(ERROR) {
-            if let Some(e_str) = e_str.as_str() {
-                return e_str;
-            }
+        if let Some(e_str) = inner.get_field::<&str>(ERROR) {
+            return e_str;
         }
 
-        if let Some(os) = inner.get_field(OS) {
-            if let Some(os) = os.as_i64() {
-                let os = ErrNo::from(os as i32);
-                return <&'static str>::from(os);
-            }
+        if let Some(os) = inner.get_field::<i64>(OS) {
+            let os = ErrNo::from(os as i32);
+            return <&'static str>::from(os);
         }
 
         err_kind_to_str(self.0.kind())
@@ -364,7 +358,7 @@ impl OneErr {
     pub fn set_field<K, T>(&mut self, name: &K, t: T) -> &mut Self
     where
         K: ?Sized + std::fmt::Display,
-        T: Into<serde_json::Value>,
+        T: Into<Value>,
     {
         let name = name.to_string().into_boxed_str();
         match &*name {
@@ -379,18 +373,17 @@ impl OneErr {
     }
 
     /// Get the message associated with this instance, or empty string.
-    pub fn get_message(&self) -> &str {
+    pub fn get_message(&self) -> Option<&str> {
         self.get_field(MESSAGE)
-            .map(|m| m.as_str())
-            .flatten()
-            .unwrap_or("")
     }
 
-    /// Get the raw json value of a raw additional field associated with
-    /// this error, or None if no such field exists.
-    pub fn get_field<R>(&self, name: R) -> Option<&serde_json::Value>
+    /// Get the value of an additional field associated with
+    /// this error, or None if no such field exists. Valid output types:
+    /// `&str`, `bool`, `i64`, `u64`, and `f64`.
+    pub fn get_field<'lt, R, V>(&'lt self, name: R) -> Option<V>
     where
         R: AsRef<str>,
+        Option<V>: From<&'lt Value>,
     {
         self.priv_as_inner().get_field(name.as_ref())
     }
@@ -414,11 +407,7 @@ impl OneErr {
     ) -> (std::io::ErrorKind, Option<ErrNo>, &OneErrInner) {
         let kind = self.0.kind();
         let inner = self.priv_as_inner();
-        let os = inner
-            .get_field(OS)
-            .as_ref()
-            .map(|r| r.as_i64().map(|e| ErrNo::from(e as i32)))
-            .flatten();
+        let os = inner.get_field::<i64>(OS).map(|e| ErrNo::from(e as i32));
         (kind, os, inner)
     }
 
