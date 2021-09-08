@@ -275,21 +275,21 @@ impl std::str::FromStr for OneErr {
     type Err = OneErr;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        serde_json::from_str(s)
-            .map_err(|e| OneErr::new(crate::io_error::INVALID_DATA_STR, &e))
+        serde_json::from_str(s).map_err(|e| {
+            OneErr::with_message(crate::io_error::INVALID_DATA_STR, &e)
+        })
     }
 }
 
 impl OneErr {
     /// Create a new OneErr error instance.
-    pub fn new<K, M>(kind: &K, message: &M) -> Self
+    pub fn new<K>(kind: K) -> Self
     where
-        K: ?Sized + std::fmt::Display,
-        M: ?Sized + std::fmt::Display,
+        K: std::fmt::Display,
     {
         let kind_str = kind.to_string();
         let (kind, os) = parse_err_str(&kind_str);
-        let mut err: OneErr = if let Some(os) = os {
+        if let Some(os) = os {
             if let ErrNo::Other = os {
                 let mut inner = OneErrInner::new();
                 inner.set_field(ERROR.into(), kind_str);
@@ -307,7 +307,16 @@ impl OneErr {
             } else {
                 kind.into()
             }
-        };
+        }
+    }
+
+    /// Create a new OneErr error instance with a message.
+    pub fn with_message<K, M>(kind: K, message: M) -> Self
+    where
+        K: std::fmt::Display,
+        M: std::fmt::Display,
+    {
+        let mut err = Self::new(kind);
         err.priv_as_inner_mut()
             .set_field(MESSAGE.into(), message.to_string());
         err

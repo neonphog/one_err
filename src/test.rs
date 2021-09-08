@@ -87,12 +87,27 @@ fn disp_ser_deser() {
     e.set_field("test", "test");
     test("Other", "EOTHER", "Other", e);
 
-    let e = OneErr::new("ConnectionReset", "my msg");
+    let e = OneErr::with_message("ConnectionReset", "my msg");
     test("ConnectionReset", "ECONNRESET", "ConnectionReset", e);
 
-    let e = OneErr::new("EFAULT", "my msg");
+    let e = OneErr::with_message("EFAULT", "my msg");
     test("Other", "EFAULT", "EFAULT", e);
 
-    let e = OneErr::new("CustomMsg", "my msg");
+    let e = OneErr::with_message("CustomMsg", "my msg");
     test("Other", "EOTHER", "CustomMsg", e);
+
+    let e = <Result<(), &'static str>>::Err("foo")
+        .map_err(OneErr::new)
+        .unwrap_err();
+    test("Other", "EOTHER", "foo", e);
+
+    let e = std::str::from_utf8(&[0, 159, 146, 150])
+        .map_err(OneErr::new)
+        .unwrap_err();
+    test(
+        "Other",
+        "EOTHER",
+        "invalid utf-8 sequence of 1 bytes from index 1",
+        e,
+    );
 }

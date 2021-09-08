@@ -64,8 +64,8 @@ const ERR_BAR: &str = "BAR";
 
 for res in [
     Ok("not-error"),
-    Err(OneErr::new(ERR_FOO, "foo test")),
-    Err(OneErr::new(ERR_BAR, "bar test")),
+    Err(OneErr::with_message(ERR_FOO, "foo test")),
+    Err(OneErr::with_message(ERR_BAR, "bar test")),
 ] {
     match res.as_ref().map_err(|e| (e.str_kind(), e)) {
         Ok(ok) => assert_eq!("not-error", *ok),
@@ -89,12 +89,12 @@ pub struct ErrReader;
 
 impl Read for ErrReader {
     fn read(&mut self, _buf: &mut [u8]) -> std::io::Result<usize> {
-        Err(OneErr::new(CUSTOM_ERR, "foo").into())
+        Err(OneErr::new(CUSTOM_ERR).into())
     }
 }
 
 assert_eq!(
-    r#"{"error":"CustomError","message":"foo"}"#,
+    r#"{"error":"CustomError"}"#,
     &ErrReader.read(&mut []).unwrap_err().to_string(),
 );
 ```
@@ -106,11 +106,11 @@ use one_err::*;
 
 const CUSTOM_ERR: &str = "CustomError";
 
-let err = OneErr::new(CUSTOM_ERR, "bar");
+let err = OneErr::new(CUSTOM_ERR);
 let enc = err.to_string();
 
 assert_eq!(
-    r#"{"error":"CustomError","message":"bar"}"#,
+    r#"{"error":"CustomError"}"#,
     &enc,
 );
 
