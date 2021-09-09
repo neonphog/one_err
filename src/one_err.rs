@@ -100,6 +100,30 @@ impl From<std::io::Error> for OneErr {
     }
 }
 
+impl From<()> for OneErr {
+    fn from(_: ()) -> Self {
+        std::io::ErrorKind::Other.into()
+    }
+}
+
+impl From<String> for OneErr {
+    fn from(s: String) -> Self {
+        s.as_str().into()
+    }
+}
+
+impl From<&String> for OneErr {
+    fn from(s: &String) -> Self {
+        s.as_str().into()
+    }
+}
+
+impl From<&str> for OneErr {
+    fn from(s: &str) -> Self {
+        OneErr::new(s)
+    }
+}
+
 impl From<OneErr> for std::io::Error {
     fn from(e: OneErr) -> Self {
         e.0
