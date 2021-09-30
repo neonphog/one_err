@@ -84,8 +84,10 @@ pub(crate) fn err_kind_to_str(kind: std::io::ErrorKind) -> &'static str {
         WriteZero => WRITE_ZERO_STR,
         Interrupted => INTERRUPTED_STR,
         UnexpectedEof => UNEXPECTED_EOF_STR,
-        Unsupported => UNSUPPORTED_STR,
-        OutOfMemory => OUT_OF_MEMORY_STR,
+        //#[cfg(version("1.53"))]
+        //Unsupported => UNSUPPORTED_STR,
+        //#[cfg(version("1.54"))]
+        //OutOfMemory => OUT_OF_MEMORY_STR,
         _ => OTHER_STR,
     }
 }
@@ -112,8 +114,10 @@ pub(crate) fn parse_err_str(
         WRITE_ZERO_STR => WriteZero,
         INTERRUPTED_STR => Interrupted,
         UNEXPECTED_EOF_STR => UnexpectedEof,
-        UNSUPPORTED_STR => Unsupported,
-        OUT_OF_MEMORY_STR => OutOfMemory,
+        //#[cfg(version("1.53"))]
+        //UNSUPPORTED_STR => Unsupported,
+        //#[cfg(version("1.54"))]
+        //OUT_OF_MEMORY_STR => OutOfMemory,
         _ => Other,
     };
 

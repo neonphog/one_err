@@ -531,8 +531,10 @@ impl From<&ErrNo> for std::io::ErrorKind {
             ErrNo::Intr => Interrupted,
             ErrNo::Inval => InvalidInput,
             ErrNo::NoEnt => NotFound,
-            ErrNo::NoMem => OutOfMemory,
-            ErrNo::NoSys => Unsupported,
+            //#[cfg(version("1.54"))]
+            //ErrNo::NoMem => OutOfMemory,
+            //#[cfg(version("1.53"))]
+            //ErrNo::NoSys => Unsupported,
             ErrNo::NotConn => NotConnected,
             ErrNo::Pipe => BrokenPipe,
             ErrNo::WouldBlock => WouldBlock,
@@ -562,8 +564,10 @@ impl From<&std::io::ErrorKind> for ErrNo {
             Interrupted => ErrNo::Intr,
             InvalidInput => ErrNo::Inval,
             NotFound => ErrNo::NoEnt,
-            OutOfMemory => ErrNo::NoMem,
-            Unsupported => ErrNo::NoSys,
+            //#[cfg(version("1.54"))]
+            //OutOfMemory => ErrNo::NoMem,
+            //#[cfg(version("1.53"))]
+            //Unsupported => ErrNo::NoSys,
             NotConnected => ErrNo::NotConn,
             BrokenPipe => ErrNo::Pipe,
             WouldBlock => ErrNo::WouldBlock,

@@ -1,6 +1,6 @@
 [package]
 name = "one_err"
-version = "0.0.4"
+version = "0.0.5"
 authors = ["neonphog <neonphog@gmail.com>"]
 edition = "2018"
 description = "OneErr to rule them all"
