@@ -1,6 +1,6 @@
 [package]
 name = "one_err"
-version = "0.0.5"
+version = "0.0.6"
 authors = ["neonphog <neonphog@gmail.com>"]
 edition = "2018"
 description = "OneErr to rule them all"
@@ -12,8 +12,8 @@ documentation = "https://docs.rs/one_err"
 repository = "https://github.com/neonphog/one_err"
 
 [dependencies]
-indexmap = { version = "1.5", optional = true }
-libc = { version = "0.2.101", default-features = false }
+indexmap = { version = "1.9.1", optional = true }
+libc = { version = "0.2.132", default-features = false }
 serde = { version = "1", default-features = false }
 serde_json = { version = "1", default-features = false }
 
