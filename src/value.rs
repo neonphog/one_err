@@ -134,7 +134,7 @@ impl<'lt> From<&'lt Value> for Option<f64> {
 impl<'lt> From<&'lt Value> for Option<&'lt str> {
     fn from(v: &'lt Value) -> Self {
         match v {
-            Value::String(s) => Some(&*s),
+            Value::String(s) => Some(s),
             _ => None,
         }
     }
