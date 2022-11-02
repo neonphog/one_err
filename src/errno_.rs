@@ -501,7 +501,6 @@ impl From<i32> for ErrNo {
             //libc::EISNAM => Self::IsNam,
             //libc::EREMOTEIO => Self::RemoteIO,
             x if x == EPERM_1 || x == EPERM_2 => Self::Perm,
-            #[cfg(target_os = "macos")]
             #[cfg(any(target_os = "macos", target_os = "android"))]
             x if x == EDEADLOCK_1 => Self::DeadLk,
             #[cfg(not(any(target_os = "macos", target_os = "android")))]
