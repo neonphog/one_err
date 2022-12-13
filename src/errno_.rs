@@ -9,7 +9,7 @@ const EWOULDBLOCK_1: i32 = libc::EAGAIN;
 const EWOULDBLOCK_2: i32 = libc::EWOULDBLOCK;
 const EDEADLOCK_1: i32 = libc::EDEADLK;
 
-#[cfg(not(any(target_os = "macos", target_os = "android")))]
+#[cfg(not(any(target_os = "macos", target_os = "android", target_os = "ios")))]
 const EDEADLOCK_2: i32 = libc::EDEADLOCK;
 
 // incase we get an errno not in our list
@@ -501,9 +501,9 @@ impl From<i32> for ErrNo {
             //libc::EISNAM => Self::IsNam,
             //libc::EREMOTEIO => Self::RemoteIO,
             x if x == EPERM_1 || x == EPERM_2 => Self::Perm,
-            #[cfg(any(target_os = "macos", target_os = "android"))]
+            #[cfg(any(target_os = "macos", target_os = "android", target_os = "ios"))]
             x if x == EDEADLOCK_1 => Self::DeadLk,
-            #[cfg(not(any(target_os = "macos", target_os = "android")))]
+            #[cfg(not(any(target_os = "macos", target_os = "android", target_os = "ios")))]
             x if x == EDEADLOCK_1 || x == EDEADLOCK_2 => Self::DeadLk,
             x if x == EWOULDBLOCK_1 || x == EWOULDBLOCK_2 => Self::WouldBlock,
             _ => Self::Other,
